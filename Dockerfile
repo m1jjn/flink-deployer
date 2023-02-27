@@ -1,10 +1,10 @@
-FROM golang:1.14.4-alpine3.12 as build
+FROM golang:1.20.1-alpine3.17 as build
 WORKDIR /flink-deployer
 COPY . .
 RUN go mod download
 RUN go build ./cmd/cli
 
-FROM alpine:3.12
+FROM alpine:3.17
 WORKDIR /flink-deployer
 COPY --from=build /flink-deployer/cli .
 VOLUME [ "/data/flink" ]

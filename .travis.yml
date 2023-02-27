@@ -23,16 +23,16 @@ after_success:
   - bash <(curl -s https://codecov.io/bash)
 
 before_deploy:
-  - docker build -t "therako/flink-deployer:$TRAVIS_BRANCH" .
+  - docker build -t "m1jjn/flink-deployer:$TRAVIS_BRANCH" .
   - docker login -u "$DOCKERHUB_USERNAME" -p "$DOCKERHUB_PASSWORD"
-  - docker tag "therako/flink-deployer:$TRAVIS_BRANCH" "therako/flink-deployer:latest"
+  - docker tag "m1jjn/flink-deployer:$TRAVIS_BRANCH" "m1jjn/flink-deployer:latest"
 
 deploy:
   - provider: script
-    script: docker push "therako/flink-deployer:$TRAVIS_BRANCH"
+    script: docker push "m1jjn/flink-deployer:$TRAVIS_BRANCH"
     on:
       branch: master
   - provider: script
-    script: docker push "therako/flink-deployer:$TRAVIS_BRANCH" && docker push "therako/flink-deployer:latest"
+    script: docker push "m1jjn/flink-deployer:$TRAVIS_BRANCH" && docker push "m1jjn/flink-deployer:latest"
     on:
       tags: true
